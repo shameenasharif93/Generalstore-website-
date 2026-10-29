@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - General Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-page">
+
+    <div class="login-box">
+        <h1>Create Account</h1>
+        <p>General Store Low Stock Alert System</p>
+
+        <form id="registerForm">
+            <label for="newUsername">Choose Username</label>
+            <input type="text" id="newUsername"
+                   placeholder="Create username" required>
+
+            <label for="newPassword">Create Password</label>
+            <input type="password" id="newPassword"
+                   placeholder="Create password (min. 6 characters)"
+                   minlength="6" required>
+
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword"
+                   placeholder="Enter password again" required>
+
+            <button type="submit">Register</button>
+            <p id="message"></p>
+        </form>
+
+        <p>Already have an account?
+            <a href="login.html">Login here</a>
+        </p>
+    </div>
+
+    <script>
+        document.getElementById("registerForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const username = document.getElementById("newUsername").value.trim();
+            const password = document.getElementById("newPassword").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+            const message = document.getElementById("message");
+
+            if (username === "" || password.length < 6) {
+                message.textContent = "Enter a username and a password with at least 6 characters.";
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                message.textContent = "Passwords do not match!";
+                return;
+            }
+
+            const users = JSON.parse(localStorage.getItem("storeUsers") || "{}");
+
+            if (users[username]) {
+                message.textContent = "Username already exists!";
+                return;
+            }
+
+            users[username] = password;
+            localStorage.setItem("storeUsers", JSON.stringify(users));
+
+            alert("Registration successful! Please log in.");
+            window.location.href = "login.html";
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>General Store - Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-page">
+
+    <div class="login-box">
+        <h1>General Store</h1>
+        <p>Low Stock Alert System</p>
+
+        <form id="loginForm">
+            <label for="username">Username</label>
+            <input type="text" id="username"
+                   placeholder="Enter username" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password"
+                   placeholder="Enter password" required>
+
+            <button type="submit">Login</button>
+            <p id="message"></p>
+        </form>
+    </div>
+
+   
+<script>
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const username = document.getElementById("username").value.trim();
+        const password = document.getElementById("password").value;
+        const message = document.getElementById("message");
+
+        const users = JSON.parse(localStorage.getItem("storeUsers") || "{}");
+
+        if (users[username] && users[username] === password) {
+            sessionStorage.setItem("loggedInUser", username);
+            window.location.href = "dashboard.html";
+        } else {
+            message.textContent = "Invalid username or password. Please register first.";
+        }
+    });
+</script>
+</body>
+</html>
+

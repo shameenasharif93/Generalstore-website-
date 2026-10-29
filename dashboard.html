@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>General Store Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="dashboard-header">
+        <div>
+            <h1>General Store</h1>
+            <p>Low Stock Alert System</p>
+        </div>
+        <button onclick="logout()">Logout</button>
+    </header>
+
+    <main class="dashboard-main">
+        <h2>Dashboard</h2>
+
+        <div class="dashboard">
+            <div class="card">
+                <h3>Total Products</h3>
+                <p id="total">0</p>
+            </div>
+
+            
+<div class="card low-stock-card" id="lowStockCard" role="button" tabindex="0">
+    <h3>Low Stock Items</h3>
+    <p id="lowStock">0</p>
+    <div id="lowStockNames" style="display: none;"></div>
+    <small>Click to view low-stock products</small>
+</div>
+
+        </div>
+
+        <h2>Add Product</h2>
+
+<form id="productForm" class="product-form">
+    <input type="text" id="name"
+           placeholder="Product name" required>
+
+    <input type="number" id="quantity"
+           placeholder="Quantity" min="0" step="any" required>
+
+    <select id="unit" required>
+        <option value="kg">Kilogram (kg)</option>
+        <option value="g">Gram (g)</option>
+        <option value="litre">Litre</option>
+        <option value="ml">Millilitre (ml)</option>
+        <option value="piece">Piece</option>
+        <option value="packet">Packet</option>
+        <option value="box">Box</option>
+        <option value="bottle">Bottle</option>
+        <option value="dozen">Dozen</option>
+    </select>
+
+    <button type="submit">Add Product</button>
+</form>
+
+<h2>Update Product</h2>
+
+<form id="updateForm" class="product-form">
+    <input type="text" id="updateName"
+           placeholder="Current Product Name" required>
+
+    <input type="text" id="newProductName"
+           placeholder="New Product Name" required>
+
+    <input type="number" id="updateQuantity"
+           placeholder="New Quantity" min="0" step="any" required>
+
+    <select id="updateUnit" required>
+        <option value="kg">Kilogram (kg)</option>
+        <option value="g">Gram (g)</option>
+        <option value="litre">Litre</option>
+        <option value="ml">Millilitre (ml)</option>
+        <option value="piece">Piece</option>
+        <option value="packet">Packet</option>
+        <option value="box">Box</option>
+        <option value="bottle">Bottle</option>
+        <option value="dozen">Dozen</option>
+    </select>
+
+    <button type="submit">Update Product</button>
+</form>
+
+        <h2>Inventory</h2>
+
+        <input type="search" id="search"
+               placeholder="Search products..." class="search-box">
+
+        <div class="table-container">
+            <table>
+                <thead>
+ <tr>
+    <th>Product Name</th>
+    <th>Quantity</th>
+    <th>Status</th>
+    <th>Action</th>
+</tr>
+                </thead>
+                <tbody id="productList"></tbody>
+            </table>
+        </div>
+
+        <p id="emptyMessage">No products added yet.</p>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
